@@ -140,7 +140,6 @@ print('all_data:', len(all_data))
 data_length = [len(sq) for sq in all_data]
 data = rnn_utils.pad_sequence(all_data, batch_first=True, padding_value=0.0)     # 用零补充，使长度对齐
 
-data = data.cuda()
 
 #把拆分成帧的 数据 改成 60帧一个样本
 left_frame_tensor = data[0:left_data_len]
@@ -152,11 +151,11 @@ non_frame_tensor = data[left_data_len+right_data_len:]
 left_tensor = []
 right_tensor = []
 non_tensor = []
-left_lable = torch.empty(1,dtype=torch.int64).cuda()
+left_lable = torch.empty(1,dtype=torch.int64)
 left_lable[0] = 1
-right_lable = torch.empty(1,dtype=torch.int64).cuda()
+right_lable = torch.empty(1,dtype=torch.int64)
 right_lable[0] = 2
-lk_lable = torch.empty(1,dtype=torch.int64).cuda()
+lk_lable = torch.empty(1,dtype=torch.int64)
 lk_lable[0] = 0
 
 
@@ -206,8 +205,8 @@ class LSTMC(nn.Module):
 
     def init_hidden(self):
         if self.use_gpu:
-            h0 = Variable(torch.zeros(1, self.batch_size, self.hidden_dim).cuda())
-            c0 = Variable(torch.zeros(1, self.batch_size, self.hidden_dim).cuda())
+            h0 = Variable(torch.zeros(1, self.batch_size, self.hidden_dim))
+            c0 = Variable(torch.zeros(1, self.batch_size, self.hidden_dim))
         else:
             h0 = Variable(torch.zeros(1, self.batch_size, self.hidden_dim))
             c0 = Variable(torch.zeros(1, self.batch_size, self.hidden_dim))
@@ -253,8 +252,6 @@ def adjust_learning_rate(optimizer, epoch):
 ### create model
 model = LSTMC(embedding_dim=embedding_dim,hidden_dim=hidden_dim,
                        label_size=nlabel, batch_size=batch_size, use_gpu=use_gpu)
-if use_gpu:
-    model = model.cuda()
 
 dtrain_set = training_set
 dtest_set = testing_set
