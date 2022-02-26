@@ -189,6 +189,7 @@ size = len(non_tensor)
 training_set.extend(non_tensor[:int(size*0.7)])
 testing_set.extend(non_tensor[int(size*0.7):])
 
+print(right_tensor[0][0].shape)
 
 class LSTMC(nn.Module):
 
