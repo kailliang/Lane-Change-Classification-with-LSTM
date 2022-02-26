@@ -16,7 +16,7 @@ import torch.optim as optim
 
 
 # Output: {'name': 'Bob', 'languages': ['English', 'French']}
-main_dir = './EVENTS'
+main_dir = '/home/k/kai/data/EVENTS'
 left_events_dir = main_dir + '/' + 'LEFT' # 'RIGHT' or right, 'NONE' for no-lane change
 right_events_dir = main_dir + '/' + 'RIGHT' # 'RIGHT' or right, 'NONE' for no-lane change
 lk_events_dir = main_dir + '/' + 'NONE' # 'RIGHT' or right, 'NONE' for no-lane change
@@ -375,11 +375,9 @@ result['param'] = param
 if use_plot:
     import PlotFigure as PF
     PF.PlotFigure(result, use_save)
-if use_save:
-    filename = 'log/LSTM_classifier_' + datetime.now().strftime("%d-%h-%m-%s") + '.pkl'
-    result['filename'] = filename
 
-    fp = open(filename, 'wb')
-    pickle.dump(result, fp)
-    fp.close()
-    print('File %s is saved.' % filename)
+    
+    
+ 
+    
+    
