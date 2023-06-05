@@ -13,9 +13,6 @@ import copy
 from torch.utils.data import DataLoader
 import torch.optim as optim
 
-
-
-# Output: {'name': 'Bob', 'languages': ['English', 'French']}
 main_dir = '/home/k/kai/data/EVENTS'
 left_events_dir = main_dir + '/' + 'LEFT' # 'RIGHT' or right, 'NONE' for no-lane change
 right_events_dir = main_dir + '/' + 'RIGHT' # 'RIGHT' or right, 'NONE' for no-lane change
